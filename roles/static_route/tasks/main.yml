@@ -1,0 +1,48 @@
+---
+# Static Routes
+- name: Configure IPv4 static routing for wan1 connection
+  fortinet.fortios.fortios_router_static:
+    vdom: "root"
+    state: "present"
+    access_token: "<your_own_value>"
+    router_static:
+      priority: "1"
+      bfd: "enable"
+      blackhole: "enable"
+      comment: "static route for wan1 connection"
+      device: "wan1"
+      distance: "10"
+      dst: "0.0.0.0 0.0.0.0"
+      dynamic_gateway: "disable"
+      gateway: "192.168.1.1"
+      link_monitor_exempt: "disable"
+      sdwan: "disable"
+      seq_num: "1"
+      status: "enable"
+      tag: "0"
+      virtual_wan_link: "disable"
+      vrf: "unspecified"
+      weight: "0"
+
+- name: Configure IPv4 static routing table for tunnel
+  fortinet.fortios.fortios_router_static:
+    vdom: "root"
+    state: "present"
+    access_token: "<your_own_value>"
+    router_static:
+      priority: "2"
+      bfd: "enable"
+      blackhole: "enable"
+      comment: "static route for tunnel"
+      device: "tunnel"
+      distance: "10"
+      dst: "192.168.2.0 255.255.255.0"
+      dynamic_gateway: "disable"
+      link_monitor_exempt: "disable"
+      sdwan: "disable"
+      seq_num: "2"
+      status: "enable"
+      tag: "0"
+      virtual_wan_link: "disable"
+      vrf: "unspecified"
+      weight: "0"

@@ -1,0 +1,7 @@
+# Vars will need to be updated once tunnel automation is complete
+
+# ansible_user: justin
+# ansible_ssh_private_key_file: ~/.ssh/ansible
+# user_home: /home/justin
+# static_ip: 192.168.1.147
+# gateway: 192.168.1.1

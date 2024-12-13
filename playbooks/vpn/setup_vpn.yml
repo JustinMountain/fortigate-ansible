@@ -1,0 +1,8 @@
+---
+- name: Initiate a VPN Tunnel for FortiGate 50E
+  hosts: "fortigate_50e"
+  roles:
+    - role: tunnel
+    - role: static_routes
+    - role: firewall_policy
+    

@@ -1,0 +1,160 @@
+----- Tunnels
+
+192-168-3-x # config vpn ipsec phase1-interface 
+
+192-168-3-x (phase1-interface) # get tunnel 
+
+name                : tunnel
+type                : static 
+interface           : wan1 
+ip-version          : 4 
+ike-version         : 2 
+local-gw            : 0.0.0.0
+keylife             : 28800
+authmethod          : psk 
+authmethod-remote   : 
+peertype            : any 
+net-device          : disable 
+passive-mode        : disable 
+exchange-interface-ip: disable 
+aggregate-member    : disable 
+mode-cfg            : disable 
+proposal            : aes256-sha384 
+localid             : 
+localid-type        : auto 
+auto-negotiate      : enable 
+negotiate-timeout   : 30
+fragmentation       : enable 
+ip-fragmentation    : post-encapsulation 
+dpd                 : on-demand 
+forticlient-enforcement: disable 
+comments            : 
+dhgrp               : 21 20 19 
+suite-b             : disable 
+eap                 : disable 
+ppk                 : disable 
+wizard-type         : custom 
+reauth              : disable 
+idle-timeout        : disable 
+ha-sync-esp-seqno   : enable 
+auto-discovery-sender: disable 
+auto-discovery-receiver: disable 
+auto-discovery-forwarder: disable 
+encapsulation       : none 
+nattraversal        : disable 
+fragmentation-mtu   : 1200
+childless-ike       : disable 
+rekey               : enable 
+fec-egress          : disable 
+fec-ingress         : disable 
+network-overlay     : disable 
+remote-gw           : 192.168.1.249
+monitor             : 
+tunnel-search       : selectors 
+add-gw-route        : disable 
+psksecret           : * 
+dpd-retrycount      : 3
+dpd-retryinterval   : 20
+
+
+192-168-3-x (phase1-interface) # show
+
+config vpn ipsec phase1-interface
+    edit "tunnel"
+        set interface "wan1"
+        set ike-version 2
+        set keylife 28800
+        set peertype any
+        set net-device disable
+        set proposal aes256-sha384
+        set dhgrp 21 20 19
+        set nattraversal disable
+        set remote-gw 192.168.1.249
+        set psksecret ENC j/cbwk4b/pQkgSGlHnPe/R4/7ijSN1XkHxLql1rvfokrsLd2w++Gr6vpY7hpBYiHmarcPrGRa8vm6oTXVQW7Y/Xi1Et7/29q1sHLcPA808KKiMd5OIAjuotfaxlQ7NQEFDm7h71mZdQ1L/HtDXkFoWWk2t03Xu2no4cxZkoefXL4cnZVjnh7o1NE4papwmLGE9wjSg==
+    next
+end
+
+
+192-168-3-x # 192-168-3-x # config vpn ipsec phase2-interface  
+
+192-168-3-x (phase2-interface) # get tunnel
+name                : tunnel
+phase1name          : tunnel 
+proposal            : aes256-sha384 
+pfs                 : enable 
+ipv4-df             : disable 
+dhgrp               : 21 20 19 
+replay              : enable 
+keepalive           : disable 
+auto-negotiate      : disable 
+auto-discovery-sender: phase1 
+auto-discovery-forwarder: phase1 
+keylife-type        : seconds 
+encapsulation       : tunnel-mode 
+comments            : 
+protocol            : 0
+src-addr-type       : subnet 
+src-port            : 0
+dst-addr-type       : subnet 
+dst-port            : 0
+keylifeseconds      : 43200
+src-subnet          : 192.168.3.0 255.255.255.0
+dst-subnet          : 192.168.2.0 255.255.255.0
+
+192-168-3-x (phase2-interface) # show
+
+config vpn ipsec phase2-interface
+    edit "tunnel"
+        set phase1name "tunnel"
+        set proposal aes256-sha384
+        set dhgrp 21 20 19
+        set src-subnet 192.168.3.0 255.255.255.0
+        set dst-subnet 192.168.2.0 255.255.255.0
+    next
+end
+
+----- Static Routes
+
+
+192-168-3-x # config router static  
+
+192-168-3-x (static) # get 1
+
+seq-num             : 1
+status              : enable 
+dst                 : 192.168.2.0 255.255.255.0
+distance            : 10
+weight              : 0
+priority            : 1
+device              : tunnel 
+comment             : 
+blackhole           : disable 
+dynamic-gateway     : disable 
+virtual-wan-link    : disable 
+link-monitor-exempt : disable 
+bfd                 : disable 
+
+
+192-168-3-x (static) # get 2
+
+seq-num             : 2
+status              : enable 
+dst                 : 0.0.0.0 0.0.0.0
+gateway             : 192.168.1.1
+distance            : 10
+weight              : 0
+priority            : 0
+device              : wan1 
+comment             : 
+blackhole           : disable 
+dynamic-gateway     : disable 
+virtual-wan-link    : disable 
+dstaddr             : 
+internet-service    : 0
+internet-service-custom: 
+link-monitor-exempt : disable 
+bfd                 : disable 
+
+ 
+
+
