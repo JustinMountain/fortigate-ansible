@@ -1,0 +1,22 @@
+# # ansible_user: ansible
+# # ansible_password: igarashi
+# # ansible_httpapi_username: "ansible"
+# # ansible_httpapi_password: "igarashi"
+# ansible_network_os: fortinet.fortios.fortios
+# ansible_connection: httpapi
+# ansible_httpapi_validate_certs: no
+# ansible_httpapi_use_ssl: yes
+
+
+
+# # ansible_host: "192.168.1.147"
+# # ansible_connection: "httpapi"
+# # ansible_network_os: "fortios"
+# # ansible_httpapi_use_ssl: yes
+# # ansible_httpapi_validate_certs: no
+# # ansible_httpapi_port: 443
+
+# # # Try with both formats to see which one works
+# # ansible_httpapi_token: "fHbwxys0m4rptpmhnkp1npmz5h8p1q"
+# # access_token: "fHbwxys0m4rptpmhnkp1npmz5h8p1q"
+ansible_httpapi_session_key: {"access_token":"fHbwxys0m4rptpmhnkp1npmz5h8p1q"}

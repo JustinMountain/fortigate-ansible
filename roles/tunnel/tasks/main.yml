@@ -5,7 +5,7 @@
   fortinet.fortios.fortios_vpn_ipsec_phase1_interface:
     vdom: "root"
     state: "present"
-    access_token: "<your_own_value>"
+    access_token: "{{ access_token }}"
     vpn_ipsec_phase1_interface:
       name: "tunnel"
       type: "static"
@@ -32,7 +32,7 @@
       dpd: "on-demand"
       forticlient_enforcement: "disable"
       comments: ""
-      dhgrp: "21 20 19"
+      dhgrp: "21"
       suite_b: "disable"
       eap: "disable"
       ppk: "disable"
@@ -64,14 +64,14 @@
   fortinet.fortios.fortios_vpn_ipsec_phase2_interface:
     vdom: "root"
     state: "present"
-    access_token: "<your_own_value>"
+    access_token: "{{ access_token }}"
     vpn_ipsec_phase2_interface:
       name: "tunnel"
       phase1name: "tunnel"
       proposal: "aes256-sha384"
       pfs: "enable"
       ipv4_df: "disable"
-      dhgrp: "21 20 19"
+      dhgrp: "21"
       replay: "enable"
       keepalive: "disable"
       auto_negotiate: "disable"

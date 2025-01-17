@@ -1,8 +1,19 @@
 ---
 - name: Initiate a VPN Tunnel for FortiGate 50E
-  hosts: "fortigate_50e"
+  hosts: "fortigate50e"
+  connection: httpapi
+  collections:
+    - fortinet.fortios
+  vars:
+    vdom: "root"
+    ansible_httpapi_use_ssl: true
+    ansible_httpapi_validate_certs: false
+    ansible_httpapi_port: 443
+    ansible_httpapi_session_key: {"access_token":"fHbwxys0m4rptpmhnkp1npmz5h8p1q"}
   roles:
     - role: tunnel
-    - role: static_routes
-    - role: firewall_policy
+      vars:
+        access_token: "{{ ansible_httpapi_session_key.access_token }}"
+  #   - role: static_route
+  #   - role: firewall_policy
     
